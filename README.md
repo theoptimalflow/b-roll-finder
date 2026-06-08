@@ -23,6 +23,61 @@ It's built for **reference-rich talking-head video**, where the speaker names co
 
 ---
 
+## 📥 Install
+
+It's an **agent skill** — a methodology file your AI coding agent (e.g. [Claude Code](https://claude.com/claude-code)) reads and follows. There's no package to `npm install`; you register the skill and install the CLI tools it drives.
+
+**1. Clone the repo**
+```bash
+git clone https://github.com/louisedesadeleer/b-roll-finder.git
+```
+
+**2. Register it with your agent.** For Claude Code, add a pointer in your `CLAUDE.md` (or drop `SKILL.md` in your skills directory):
+```markdown
+#### /find-broll
+Read: /path/to/b-roll-finder/SKILL.md
+Source b-roll for a video edit — classify each moment, scope the search, return vetted candidates, place on the word.
+```
+
+**3. Install the tooling it drives** (macOS / Homebrew shown):
+```bash
+brew install yt-dlp ffmpeg imagemagick           # search/download, compositing, contact sheets
+uv tool install mlx-whisper                       # GPU word-level transcription (Apple Silicon)
+#   …or: pip install -U openai-whisper            # CPU fallback
+npm create video@latest                           # Remotion, for concept motion-graphics (optional)
+```
+A Chrome/Chromium install is also used for headless screenshots of public pages. No API keys required.
+
+---
+
+## ▶️ How to use it
+
+Invoke the skill and hand it your video. It runs a **plan-first** loop — it asks a couple of setup questions, proposes a plan, and **waits for your go before sourcing anything.**
+
+```
+you:  /find-broll
+      here's my podcast intro — <transcript or /path/to/intro.mp4>
+
+it:   • asks: format/style? cadence? motion-graphics? any guests + handles?
+      • proposes an annotated plan — per-beat interpretation + b-roll type + palette mix
+you:  approve / cut / swap / add
+it:   • sources a scored contact sheet of vetted candidates
+you:  pick the ones you like
+it:   • (optional) cuts them full-bleed + silent and places each on the word
+```
+
+**What to give it:**
+- A **transcript** (paste it), **or** a **video/audio file path** (it transcribes with word-level timestamps), **or** a project from your editor.
+- Any **must-includes**, and **guest names/handles** for interviews.
+
+### What kind of video works best
+
+- **Reference-rich talking-head** — a **podcast/interview intro** or a **tutorial/explainer intro** where the speaker names concrete things (people, products, companies, events) or makes verifiable claims. The more proper nouns and provable claims, the better the results.
+- **Short is ideal** (under ~10 min). For long videos, it scores and selects the high-value segments first instead of blanketing the whole runtime.
+- **Skip it for** pure vibe/mood or music-only video — there b-roll is a taste call it hands back to you.
+
+---
+
 ## ⚙️ How it works
 
 ```
