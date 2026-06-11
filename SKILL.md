@@ -8,6 +8,10 @@ description: Source b-roll for a video edit — classify each moment, scope the 
 > A reusable methodology for sourcing and placing b-roll on talking-head video.
 > Genericized from a working agent skill. Adapt paths and brand tokens to your own setup.
 
+## ⛔ USER OVERRIDES ARE LAW — and they persist
+
+When the user states a preference or ban mid-run ("no memes", "no text cards", "nothing political"), it applies IMMEDIATELY and for the rest of the session, AND gets written into the profile's Guardrails right then — not at the end. A banned category is never sourced again, never proposed again, never "just one candidate to check". Violating a stated ban is the worst failure this skill can make: it tells the user the agent doesn't listen.
+
 ## ⛔ STEP 0 — ONBOARDING GATE (run this check before ANYTHING else, every session)
 
 Open the profile (TASTE.md or the user's fork). **The ONLY thing that skips onboarding is a literal `Confirmed-by: <name> (<date>)` line at the top of the profile.** No line → ask the four onboarding questions (below) out loud, write the answers into the profile, add the line. This is NOT optional and NOT inferable:
@@ -52,7 +56,7 @@ Just do it and show the result. The user's taste checkpoints stay: the **plan ap
 
 The skill earned trust through restraint; heavyweight process makes output WORSE, not better (tested 2026-06-11: a full-funnel run took ~10× longer and shipped worse composition than the lean run). Defaults:
 
-- **Plan approval IS the pick.** When the user approves the beat plan ("go for it"), source **ONE best candidate per beat** for objective routes (Entity/Receipts/Product) and place it. NO multi-candidate sourcing, NO contact sheets — those exist ONLY for taste-route beats (Cultural/Meme) or when the user explicitly asks for options.
+- **Plan approval IS the pick.** When the user approves the beat plan ("go for it"), source **ONE best candidate per beat** for objective routes (Entity/Receipts/Product) and place it. NO multi-candidate sourcing, NO contact sheets. (Contact sheets exist only when the user EXPLICITLY asks for options on a beat — and meme/cultural beats are never auto-sourced at all; see the routing table.)
 - **Research depth is bounded at plan time.** Verify referents enough to source accurately; do NOT exhaust every sourcing route before the plan. The escalation ladder fires only AFTER the user has agreed a beat and the easy routes failed — never speculatively.
 - **Per-beat time box:** if a single beat's sourcing exceeds ~5 minutes, place the best-available candidate or drop the beat and flag it. One stubborn artifact must not stall the edit.
 - **One verify pass + targeted fixes** beats endless polishing. Render → grid → fix the failures → re-verify only the fixed beats.
@@ -94,7 +98,7 @@ Classify EVERY moment before searching:
 | **Concept** | An abstract idea you'd have to *draw* (a process, a mental model, a stat) | Custom motion-graphics (e.g. Remotion) in your brand style — or real footage from the authoritative source |
 
 **⛔ Cards never replace real footage of a literal thing.** If the beat names a concrete entity (grape varieties, a product, a place) and real footage exists, a generated text card is a FAIL — even if the user's fingerprint shows they like cards. Cards are for ideas with NO literal footage. (2026-06-11: a "three grapes" beat got a navy text card while the official film had the actual clusters — wrong.)
-| **Cultural / Meme** | A creator clip or joke where *taste* decides | The user's own library / exemplars; surfaced for the user to pick, never blind-picked |
+| **Cultural / Meme** | A creator clip or joke where *taste* decides | **NEVER searched or fetched by the agent.** Propose the MOMENT + register ("punchline at 2:31, deadpan") in the plan; the user supplies the meme from their library — or strikes the beat. Agent-found memes have failed every time they've been tried. |
 
 **Litmus (in order):** *Happening now?* → Receipts. *A person / product / event?* → Entity (official source). *An abstract idea?* → Concept (motion-graphics). *A reaction beat?* → Meme (user's library).
 
@@ -118,7 +122,7 @@ A clip merely *containing* the person is NOT relevant b-roll (the #1 person-clip
 - **Reference screenshots** — the real post/essay/page cited (an authentic screenshot beats a synthetic quote-card). **The subject's own website, captured full-page and cropped per viewport, is a goldmine** — history pages, team photos, maps, product pages.
 - **Concept motion-graphics** — for ideas, charts, stats. Build on-brand; never synthetic-looking stock.
 - **Real / evocative footage** — stock that conveys a story/action/mood. Eyeball every frame for watermarks, burned-in captions, and AI-slop.
-- **Memes / reactions** — from the user's curated library only.
+- **Memes / reactions** — from the user's curated library only; the agent proposes the moment, never the meme. If the profile or the user says no memes: the category does not exist.
 
 If a plan is >60% website screenshots, it's wrong.
 
