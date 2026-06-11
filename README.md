@@ -1,5 +1,7 @@
 # 🎬 B-Roll Finder
 
+![b-roll-finder](./banner.png)
+
 **An agent skill that sources accurate, on-brand b-roll for talking-head video — and places each cutaway on the exact word.**
 
 It reads your transcript, figures out what each line is *actually* about, routes every moment to the right kind of footage, and hands back a tight set of vetted candidates (you make the final pick). No keyword-matching, no random stock, no padding.
