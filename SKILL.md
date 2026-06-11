@@ -52,6 +52,8 @@ Classify EVERY moment before searching:
 | **Receipts** | Time-sensitive — drama, news, complaints, a current claim/stat | Tweets / article headlines / reviews, recency-sorted, captured as clean screenshots |
 | **Entity** | A **person**, a **physical product**, or a **historical moment** | The official / authoritative channel — the *canonical* clip, not a random upload |
 | **Concept** | An abstract idea you'd have to *draw* (a process, a mental model, a stat) | Custom motion-graphics (e.g. Remotion) in your brand style — or real footage from the authoritative source |
+
+**⛔ Cards never replace real footage of a literal thing.** If the beat names a concrete entity (grape varieties, a product, a place) and real footage exists, a generated text card is a FAIL — even if the user's fingerprint shows they like cards. Cards are for ideas with NO literal footage. (2026-06-11: a "three grapes" beat got a navy text card while the official film had the actual clusters — wrong.)
 | **Cultural / Meme** | A creator clip or joke where *taste* decides | The user's own library / exemplars; surfaced for the user to pick, never blind-picked |
 
 **Litmus (in order):** *Happening now?* → Receipts. *A person / product / event?* → Entity (official source). *An abstract idea?* → Concept (motion-graphics). *A reaction beat?* → Meme (user's library).
@@ -70,7 +72,7 @@ A clip merely *containing* the person is NOT relevant b-roll (the #1 person-clip
 
 ## The palette — MIX it, never default to website screenshots
 
-- **Faces (video)** — for a named person, a live clip of them talking (never a frozen headshot). Partial-frame / split-screen subjects → blurred-fill, never hard cover-crop. For a podcast/panel edit, the guests are ON CAMERA in the source recording — crop their tile as live video instead of hunting externally.
+- **Faces (video)** — for a named person, a live clip of them talking (never a frozen headshot). Partial-frame / split-screen subjects → blurred-fill, never hard cover-crop. For a podcast/panel edit, the guests are ON CAMERA in the source recording — crop their tile as live video instead of hunting externally. **⛔ But NEVER cut to a speaker's own tile as b-roll inside the same video they're speaking in** — the audience is already looking at them; it reads as a glitch. Tile-cropping is for using their face in OTHER videos.
 - **Product / UI** — the actual app UI or a real screen-recording (prefer own-recording > official channel > nothing; reject random third-party tutorials). **Demos must be the MOST RECENT available** — product UIs change fast; check upload dates, present them next to candidates.
 - **Receipts** — tweets, headlines, reviews, search results. For a named company, prefer a **news headline about a real event** (IPO, funding, milestone) over the homepage.
 - **Reference screenshots** — the real post/essay/page cited (an authentic screenshot beats a synthetic quote-card). **The subject's own website, captured full-page and cropped per viewport, is a goldmine** — history pages, team photos, maps, product pages.
@@ -79,6 +81,13 @@ A clip merely *containing* the person is NOT relevant b-roll (the #1 person-clip
 - **Memes / reactions** — from the user's curated library only.
 
 If a plan is >60% website screenshots, it's wrong.
+
+## Cadence guardrails — restraint reads as taste
+
+- **Beats run ~2–4s.** Anything under ~1.2s is unreadable (no sub-second shots except inside ONE deliberate burst montage).
+- **Max ONE burst montage per intro** (3–4 quick stills on a list-beat). Two+ bursts = chaos.
+- **Max ONE long hold (>5s) per intro**, and only on a genuine explainer beat. An 8-second static map is dead air.
+- When in doubt: fewer, real, obvious. The strongest edits use one clearly-right asset per beat, not the most assets.
 
 ## Motion-first — video beats a static page
 
@@ -140,7 +149,18 @@ Across re-renders the #1 failure is silently DROPPING beats the user already app
 
 ## Self-verification — look at every cut before the user does
 
-After every render, extract a frame at **every beat's midpoint AND every joint** (b-roll↔b-roll, b-roll↔face), tile them into a grid, and LOOK at it. This catches: shot-cuts inside a window flipping to wrong content, burned-in captions/watermarks, stray overlays, wrong crops, face flashes. Fix and re-verify. A render isn't done until the grid is clean.
+After every render, extract a frame at **every beat's midpoint AND every joint** (b-roll↔b-roll, b-roll↔face), tile them into a grid, and LOOK at it. Fix and re-verify. A render isn't done until the grid is clean.
+
+**Explicit AUTO-REJECT checklist — a frame containing ANY of these fails, no judgment call:**
+1. Burned-in captions/subtitles from the source clip
+2. Name-tags / lower-thirds identifying strangers
+3. Watermarks or channel logo bugs (corner badges from official bodies are a flagged exception, not a free pass)
+4. The speaker's own face/tile appearing as b-roll in their own video
+5. A generated card where the beat names a literal, filmable thing
+6. Template-looking composites (two portraits side by side, collage cards)
+7. Letterboxing, tiny floating content, or visible blur-edge framing errors
+
+Grade the grid against this list line by line — "looks fine" without the list is how watermarked clips ship.
 
 ## Fetching & formatting (editor-friendly, silent, full-bleed)
 
