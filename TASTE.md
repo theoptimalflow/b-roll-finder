@@ -1,6 +1,6 @@
 # TASTE.md — the shipped taste profile
 
-**Status: EXAMPLE PROFILE — not confirmed by any user.** Per SKILL.md Step 0, onboarding MUST run until a `Confirmed-by: <name> (<date>)` line replaces this status line — even for this profile's original author.
+Confirmed-by: Louise (2026-06-11)
 
 > A sourcing skill is only as good as its taste. This file is the curation layer [SKILL.md](SKILL.md) loads before sourcing anything: which kinds of b-roll to reach for, how fast to cut, and which sources are trusted. It ships with **my** taste (Louise's — I make fast-cut tech/marketing video) so the skill makes good calls out of the box. Fork it and make it yours — see [Make it yours](#make-it-yours) at the bottom.
 
@@ -72,9 +72,13 @@ Searches stay INSIDE this list (plus any source the script itself references). T
 - JRE Clips [interview] — podcast moments / clip culture
 
 ## Guardrails
+- **MEMES: OFF — never source, never propose** (Louise, 2026-06-11, stated explicitly mid-run). The meme fingerprint above is historical; this guardrail wins.
 
-- **Audio: ALWAYS SILENT** — I talk over all b-roll. Every sourced clip gets its audio stripped (`ffmpeg -an`). Never hand back a clip with sound. (This is my answer to onboarding question 1 in SKILL.md; yours may differ.)
-- **Stills motion: subtle sub-pixel zoom-in by default** — ~1.5%/sec, centered, rendered sub-pixel (PIL float-box Lanczos). ffmpeg `zoompan`/crop-pans stay banned at any speed (integer-stepped = shaky); no pans, nothing faster than ~2%/sec.
+- **Audio: ALWAYS SILENT** — I talk over all b-roll. Every sourced clip gets its audio stripped (`ffmpeg -an`). Never hand back a clip with sound. (Confirmed at onboarding 2026-06-11.)
+- **Stills motion: subtle sub-pixel zoom-in by default** — ~1.5%/sec, centered, rendered sub-pixel (PIL float-box Lanczos). ffmpeg `zoompan`/crop-pans stay banned at any speed (integer-stepped = shaky); no pans, nothing faster than ~2%/sec. (Confirmed at onboarding 2026-06-11.)
+- **Source attribution: AUTO (contrast-pick)** — small credit per clip, canonical source name + platform ("WIRED / YouTube"), bottom-right at ~70% opacity, white or black auto-picked per clip for contrast; moves bottom-left when the footage carries its own badge bottom-right. Never a URL. Etiquette, not a license — official/authoritative sourcing stays the real copyright posture. (Confirmed at onboarding 2026-06-11.)
+- **Motion graphics: ON** — Remotion project at `~/Downloads/prompt-overlay` (dark #0b0f17 + indigo #6366f1, grid + spring; existing comps: BellCurve, GrowthChart, BrollConcepts, Ep2Concepts — reuse/extend these). Use for concept/stat/chart beats. (Louise, 2026-06-11.)
+- **AI-generated b-roll: OFF** — never generate AI footage. Real footage, receipts, or on-brand Remotion graphics only; a beat with nothing real gets dropped or flagged, never AI-filled. (Confirmed at onboarding 2026-06-11.)
 - **Scoping: no random videos** — searches stay inside the trusted list + script-referenced sources; for "how X works", go to the authoritative source (AI → Anthropic/OpenAI/3Blue1Brown). Open YouTube search only as a flagged last resort.
 - **On-brand:** tech-literate, a bit irreverent — I market a screen recorder ([Tella](https://tella.tv)), so Loom-bashing is welcome.
 - **Off-limits:** _(fill in yours — e.g. nothing political? clip length cap? minimum resolution?)_

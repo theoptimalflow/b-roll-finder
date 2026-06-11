@@ -89,6 +89,33 @@ Fewer, perfectly-accurate beats beat lots of mediocre ones. The habit to kill is
 3. **Literal vs evocative:** concrete nouns (a product, a named person, an event) → show the actual thing. Actions & abstractions → show something that *conveys* it; don't reenact literally.
 4. **Mandatory reference sweep — every beat:** *is there a REAL ARTIFACT behind this line?* A quote, a stat, "people are saying", a named company event, "I saw/read" — almost always means a tweet, headline, review, or post exists. That artifact is a default candidate; sourcing it is the skill's job, not an extra the user must request.
 
+## Phrase-type → what to source (the judgment table)
+
+| When the narration is… | Source this |
+|---|---|
+| "people are saying" / discourse | tweets, headlines, posts, search-result screenshots |
+| a number / stat ("$24/mo", "750 sign-ups") | the figure ON SCREEN — pricing page, dashboard, chart, stat card |
+| growth / "went viral" | a graph going UP, or the viral post itself with its metrics |
+| decline / "tanking" | a graph going DOWN, error screens, the failing thing |
+| "research shows" / authority | the study/paper headline or the expert on camera |
+| a direct quote | the authentic post/blog screenshot (beats a synthetic quote-card), or them saying it |
+| an era / "back in the day" | archival/vintage footage of that period |
+| a place | establishing shots of that place |
+| comparison / "X vs Y" | sequential full-bleed singles — never an agent-built split-screen |
+| "how it works" / step-by-step | screen recording or motion graphics of the steps |
+| a story with actions ("every morning he'd…") | the PLACES & ACTIONS, evocatively — never a literal reenactment |
+| a metaphor ("like a rocket") | the metaphor object ONLY if it lands — metaphors default to SKIP |
+| an emotion / reaction beat | propose the moment + register; the user supplies the meme |
+| the creator's own content ("my video") | self-source their actual clip/post — not a search |
+
+## Genre → coverage defaults (what type, how much)
+
+Genre predicts b-roll TYPE and density better than topic does (style + cadence answers from intake override these):
+- **Competitor / drama** → receipts dominant, heavy (~40–60% coverage)
+- **Opinion / explainer** → text/concept cards + receipt bursts (~20–30%)
+- **Storytelling / listicle** → people, archival, products (~40–60%)
+- **Podcast / webinar / interview** → light punctuation (~5–10%); b-roll marks references & claims, the talking head carries the rest
+
 ## Routing — three+ kinds of b-roll go to three+ sources
 
 Classify EVERY moment before searching:
@@ -118,7 +145,7 @@ A clip merely *containing* the person is NOT relevant b-roll (the #1 person-clip
 
 ## The palette — MIX it, never default to website screenshots
 
-- **Faces (video)** — for a named person, a live clip of them talking (never a frozen headshot). Partial-frame / split-screen subjects → blurred-fill, never hard cover-crop. For a podcast/panel edit, the guests are ON CAMERA in the source recording — crop their tile as live video instead of hunting externally. **⛔ But NEVER cut to a speaker's own tile as b-roll inside the same video they're speaking in** — the audience is already looking at them; it reads as a glitch. Tile-cropping is for using their face in OTHER videos.
+- **Faces (video)** — for a named person, a live clip of them talking (never a frozen headshot). Partial-frame / split-screen subjects → blurred-fill, never hard cover-crop. For a podcast/panel edit, the guests are ON CAMERA in the source recording — crop their tile as live video instead of hunting externally. **A headshot of someone the audience won't recognize is DEAD b-roll** — for niche people, show their WORK (their post, product, talk) instead of their face; famous faces should appear in context/action, not as static portraits. **⛔ And NEVER cut to a speaker's own tile as b-roll inside the same video they're speaking in** — the audience is already looking at them; it reads as a glitch. Tile-cropping is for using their face in OTHER videos.
 - **Product / UI** — the actual app UI or a real screen-recording (prefer own-recording > official channel > nothing; reject random third-party tutorials). **Demos must be the MOST RECENT available** — product UIs change fast; check upload dates, present them next to candidates.
 - **Receipts** — tweets, headlines, reviews, search results. For a named company, prefer a **news headline about a real event** (IPO, funding, milestone) over the homepage.
 - **Reference screenshots** — the real post/essay/page cited (an authentic screenshot beats a synthetic quote-card). **The subject's own website, captured full-page and cropped per viewport, is a goldmine** — history pages, team photos, maps, product pages.
@@ -160,6 +187,13 @@ Score 1–5 and drop anything below the bar:
 5. **Format fit** — silent-able, ~2–6s, full-bleed-able, ≥720p.
 
 Check **time-sensitivity first** — a dated tweet from this month beats a years-old YouTube clip for a current story.
+
+## Search syntax — scoped beats open, always
+
+- **Channel-scoped YouTube search is the DEFAULT for Entity beats:** `yt-dlp "https://www.youtube.com/@<handle>/search?query=<q>" --flat-playlist --print "%(title).75s ||| %(duration_string)s ||| %(id)s"` — search INSIDE the official/trusted channel. `ytsearchN:<query>` is the fallback; fully open results get flagged "⚠️ outside trusted sources".
+- **Metadata first, download later:** `--flat-playlist --print` costs seconds; download only the chosen winners (`-f "bv*[height<=1080]+ba/b"`).
+- **Tweets without login:** `https://platform.twitter.com/embed/Tweet.html?id=<TWEET_ID>` renders a clean card headlessly, no auth (`&hideThread=true`; capture with `scripts/cdp_capture.py`). The tweet's real attached media resolves via `https://cdn.syndication.twimg.com/tweet-result?id=<ID>&token=a`. Verify what the attachment actually shows before shipping it.
+- **Generic evocative stock is YouTube's weak spot:** add "free to use / no copyright" qualifiers; REJECT watermarked stock-site previews and clips with burned-in captions; if YouTube only yields junk, recommend a real stock site (Pexels / Mixkit / Coverr) instead.
 
 ## Once a beat is agreed, sourcing it is the AGENT's job — the escalation ladder
 
@@ -210,6 +244,8 @@ Grade the grid against this list line by line — "looks fine" without the list 
 
 ## Fetching & formatting (editor-friendly, silent, full-bleed)
 
+- **Proxy FIRST for big sources:** if the base video is 4K/HEVC/>500MB, transcode a 1080p working copy before anything (`ffmpeg -hwaccel videotoolbox -i src -vf scale=1920:-2 -c:v h264_videotoolbox -b:v 6M -c:a aac proxy.mp4`) — every later step (frame scans, renders) runs 5–10× faster against it.
+
 - Don't grab low-res pre-merged streams — select a real stream (`-f "bv*[height<=1080]+ba/b"`).
 - Don't let `--download-sections` be the final cut (variable framerate stutters) — download the short clip, then trim with a re-encode.
 - Standard format: constant fps, cover-crop full-bleed, audio stripped:
@@ -236,5 +272,7 @@ Grade the grid against this list line by line — "looks fine" without the list 
 - **Anchor timing:** Whisper word-level timestamps + later-bias (+0.2–0.5s past the keyword).
 - **Search / download:** `yt-dlp` (no API key); headless browser + CDP for public-page screenshots (consent walls: click accept in every frame context, verify visually).
 - **Motion-graphics:** Remotion (or similar), rendered full-bleed + silent.
-- **Stills zoom:** PIL float-box resize piped to x264 (sub-pixel; never `zoompan`).
+- **Stills zoom:** `scripts/zoom_still.py` (sub-pixel PIL float-box → x264; `--blurfill` for portrait/odd aspect; never `zoompan`).
+- **Consent-wall captures:** `scripts/cdp_capture.py` (headless Chrome via CDP — clicks "accept" in every frame context, CMP-iframe aware; `CDP_SCALE=2` for crisp receipts).
+- **Cutaway rendering:** `scripts/render_cutaways.py` (segment-concat template: base visual replaced per beat window, audio untouched).
 - **Compositing:** `ffmpeg`; `ImageMagick` for contact sheets.
