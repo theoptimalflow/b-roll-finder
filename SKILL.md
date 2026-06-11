@@ -25,6 +25,23 @@ Ask these on first run and write the answers into the taste profile (TASTE.md sh
 3. **Source attribution** — credit each b-roll's source in small text bottom-right? Options: `off` · `white` · `black` · `auto` (contrast-pick per clip). The credit is the source's canonical name + platform ("Vinexposium / YouTube", "Decanter") — short, never a URL. If the footage already carries its own badge bottom-right, move the credit bottom-left for that clip. Note: an on-screen credit is etiquette, not a license — official/authoritative sources remain the real copyright posture.
 4. **AI-generated b-roll** — off by default; opt-in only for beats with no real footage, via a quality model the user names. Never silently substitute cheap AI stock.
 
+## ⚡ LEAN PATH IS THE DEFAULT — the funnel is for taste calls, not everything
+
+The skill earned trust through restraint; heavyweight process makes output WORSE, not better (tested 2026-06-11: a full-funnel run took ~10× longer and shipped worse composition than the lean run). Defaults:
+
+- **Plan approval IS the pick.** When the user approves the beat plan ("go for it"), source **ONE best candidate per beat** for objective routes (Entity/Receipts/Product) and place it. NO multi-candidate sourcing, NO contact sheets — those exist ONLY for taste-route beats (Cultural/Meme) or when the user explicitly asks for options.
+- **Research depth is bounded at plan time.** Verify referents enough to source accurately; do NOT exhaust every sourcing route before the plan. The escalation ladder fires only AFTER the user has agreed a beat and the easy routes failed — never speculatively.
+- **Per-beat time box:** if a single beat's sourcing exceeds ~5 minutes, place the best-available candidate or drop the beat and flag it. One stubborn artifact must not stall the edit.
+- **One verify pass + targeted fixes** beats endless polishing. Render → grid → fix the failures → re-verify only the fixed beats.
+- **Never auto-install heavy dependencies mid-run** (conda/MFA etc.) — use the fallback, note it, offer the install after delivery.
+
+### Source by SOURCE, not by beat (the big sourcing speed-up)
+After the plan is approved, **cluster beats by where their asset lives, then fetch each source ONCE**:
+- One full-page capture of the subject's website often covers 4–6 beats (history, team photo, map, packshots) — crop per beat from the same capture.
+- One official channel/film often covers several beats (an aerial, a close-up, a process shot) — download once, cut multiple windows.
+- Run all downloads as ONE batched background job (metadata-only search first, download only the chosen items); run captures as a second batch in parallel. Never fetch serially beat-by-beat.
+- Cache raw downloads next to the project (`assets/raw/`) so re-renders and v2s never re-fetch.
+
 ## Accuracy over volume
 
 Fewer, perfectly-accurate beats beat lots of mediocre ones. The habit to kill is keyword-matching to hit a quota.
