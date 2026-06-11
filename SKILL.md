@@ -18,6 +18,8 @@ Curation is half the skill. Every run starts by loading a **taste profile**: the
 
 ## Onboarding preferences (ask once, store in the profile)
 
+**When onboarding fires:** the shipped [TASTE.md](TASTE.md) is an EXAMPLE profile (the author's), not the user's. On first run, check the profile for a `Confirmed-by:` line naming the current user. Absent → run onboarding: ask the questions below, write the answers into the user's profile (their fork of TASTE.md), and add `Confirmed-by: <user> (<date>)` at the top. Present → skip onboarding and just load it. The user can re-trigger anytime with "redo my profile".
+
 Ask these on first run and write the answers into the taste profile (TASTE.md ships with one set of answers; confirm they fit):
 
 1. **Audio** — does the user talk over b-roll (strip ALL audio: `ffmpeg -an`) or want the clip's sound?
