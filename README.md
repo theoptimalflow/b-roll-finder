@@ -90,7 +90,8 @@ transcript ─► interpret each beat ─► classify & route ─► source cand
 4. **Scope the search.** YouTube searches stay inside trusted/official sources — official channels for entities, authoritative sources for concepts — never random open-search.
 5. **Score every candidate** on recency-fit, source authority, relevance, recognizability, and format-fit. Stale or off-topic candidates are dropped before you ever see them.
 6. **Contact sheet → you pick.** It narrows the funnel and presents vetted candidates. **The agent never makes the final taste call — you do.**
-7. **Place it precisely.** Picked clips are cut full-bleed and silent, then dropped on the exact spoken word (anchored with word-level timestamps, landing just *after* the word — never before), with soft dissolves where b-roll meets the talking head and clean cuts between back-to-back b-roll.
+7. **Place it precisely.** Picked clips are cut full-bleed and silent, then dropped on the exact spoken word (anchored with word-level timestamps, landing just *after* the word — never before). Adjacent cutaways are connected — no split-second face flashes between them.
+8. **Verify its own render.** After placing, it extracts a frame at every beat's midpoint and every joint, tiles them into a grid, and *looks* — catching wrong shots, burned-in captions, and stray overlays before you ever see the video. Every edit keeps a **b-roll manifest** so approved beats never silently disappear between versions.
 
 **Cadence:** front-loaded by default — a dense, punchy hook, then sparse and precise through the body. Accuracy over volume, always.
 
@@ -131,9 +132,10 @@ Every moment is split by **what decides the right clip**:
 ## 🛠️ Under the hood
 
 - **Transcription:** GPU Whisper (word-level timestamps) for precise anchoring.
-- **Search & download:** `yt-dlp` (no API key) for YouTube; headless browser for public-page screenshots (with consent-wall handling via CDP).
+- **Search & download:** `yt-dlp` (no API key) for YouTube; headless browser for public-page screenshots (with consent-wall handling via CDP — it clicks "accept" in every frame context and visually verifies each capture).
 - **Motion-graphics:** Remotion, rendered full-bleed and silent in your brand style.
-- **Compositing:** `ffmpeg` — full-bleed cover-crop (never letterboxed), blurred-fill for partial-frame subjects, audio stripped from every clip.
+- **Stills motion:** a very subtle Ken Burns zoom on static images by default — rendered **sub-pixel** (float-precision Lanczos per frame), never ffmpeg `zoompan` (integer-stepped = shaky). Opt out to fully static at onboarding.
+- **Compositing:** `ffmpeg` — full-bleed cover-crop (never letterboxed), blurred-fill for partial-frame subjects, no agent-built split-screens, audio stripped from every clip. Optional small source-credit label bottom-right (off/white/black/auto).
 
 ---
 
@@ -144,6 +146,9 @@ Every moment is split by **what decides the right clip**:
 - **Full-bleed, always.** Every clip fills the frame edge-to-edge — never tiny, never letterboxed.
 - **Land on the word, never before.** B-roll that appears before the word is said reads as a mistake.
 - **Mix the palette.** If a plan is >60% website screenshots, it's wrong.
+- **Skip is the last resort.** Every beat gets the full palette walked before it's allowed to stay empty.
+- **Once a beat is agreed, sourcing it is the agent's job.** A seven-step escalation ladder (local artifacts → identity hunt → yt-dlp → browser cookies → headless CDP → logged-in browser) runs before anything is handed back to you.
+- **Approved b-roll never silently disappears.** The manifest is read before every re-render.
 
 ---
 
