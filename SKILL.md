@@ -56,7 +56,7 @@ The skill earned trust through restraint; heavyweight process makes output WORSE
 - **Research depth is bounded at plan time.** Verify referents enough to source accurately; do NOT exhaust every sourcing route before the plan. The escalation ladder fires only AFTER the user has agreed a beat and the easy routes failed — never speculatively.
 - **Per-beat time box:** if a single beat's sourcing exceeds ~5 minutes, place the best-available candidate or drop the beat and flag it. One stubborn artifact must not stall the edit.
 - **One verify pass + targeted fixes** beats endless polishing. Render → grid → fix the failures → re-verify only the fixed beats.
-- **Never auto-install heavy dependencies mid-run** (conda/MFA etc.) — use the fallback, note it, offer the install after delivery.
+- **Never auto-install heavy dependencies mid-run** (conda, aligners, etc.) — use the fallback, note it, offer the install after delivery.
 
 ### Source by SOURCE, not by beat (the big sourcing speed-up)
 After the plan is approved, **cluster beats by where their asset lives, then fetch each source ONCE**:
@@ -170,9 +170,8 @@ Check **time-sensitivity first** — a dated tweet from this month beats a years
 ## Placement timing — land ON or just AFTER the word, never before
 
 - Anchor to when the keyword is **spoken**, then add a small lead (~+0.2s) so the cut lands as/just after it. B-roll *before* the word reads as a mistake.
-- **Timing engine: forced alignment, not Whisper timestamps.** Whisper word times are ±100–300ms with pauses embedded inside word durations — fine for reading, not for anchoring. Use **MFA (Montreal Forced Aligner)**: Whisper produces the transcript *text*, MFA aligns it to the audio and returns ~10–20ms word boundaries (with true silences as explicit intervals). The keyword's MFA end time + ~0.2s is the anchor. (Same architecture as the [cut-video](https://github.com/louisedesadeleer/cut-video) skill — see its README for the full MFA recipe.)
-- Whisper `--word-timestamps` is the fallback when MFA isn't installed — bias later (+0.3–0.5s) since whisper word-ends run early, and say so in the plan.
-- **Keep MFA fast by scoping it to the beats:** don't align a full episode — after the plan is approved, extract a ~30s audio window around each confirmed beat and align those tiny corpora (seconds per beat). Full-episode alignment only pays on short videos.
+- **Timing source: Whisper word-level timestamps** (`--word-timestamps True`, one pass during transcription — no extra tooling). Find the keyword's word time and anchor +0.2–0.5s after it. Whisper word-ends run slightly early and embed pauses inside word durations, so **bias LATER when unsure** — late reads as intentional, early reads as a mistake.
+- _(MFA forced alignment was tried for ~10–20ms precision and REMOVED 2026-06-11 — the runtime cost wasn't worth it; whisper + later-bias is accurate enough in practice. Don't reintroduce it.)_
 - For punchlines, land on the beat *after* the punchline.
 - **Connect adjacent b-rolls:** if two cutaways sit closer than ~a half-sentence apart, extend the first to the second's start — a <2s flash of the speaker's face between them reads as an error. (Extend the earlier clip; never start the next one before its keyword.)
 
@@ -228,7 +227,7 @@ Grade the grid against this list line by line — "looks fine" without the list 
 ## Tools
 
 - **Transcription:** GPU Whisper for transcript text (large model — the transcript drives *understanding*, so text accuracy matters).
-- **Anchor timing:** MFA forced alignment (~10–20ms word boundaries); Whisper word-timestamps as fallback.
+- **Anchor timing:** Whisper word-level timestamps + later-bias (+0.2–0.5s past the keyword).
 - **Search / download:** `yt-dlp` (no API key); headless browser + CDP for public-page screenshots (consent walls: click accept in every frame context, verify visually).
 - **Motion-graphics:** Remotion (or similar), rendered full-bleed + silent.
 - **Stills zoom:** PIL float-box resize piped to x264 (sub-pixel; never `zoompan`).
