@@ -8,6 +8,15 @@ description: Source b-roll for a video edit — classify each moment, scope the 
 > A reusable methodology for sourcing and placing b-roll on talking-head video.
 > Genericized from a working agent skill. Adapt paths and brand tokens to your own setup.
 
+## ⛔ STEP 0 — ONBOARDING GATE (run this check before ANYTHING else, every session)
+
+Open the profile (TASTE.md or the user's fork). **The ONLY thing that skips onboarding is a literal `Confirmed-by: <name> (<date>)` line at the top of the profile.** No line → ask the four onboarding questions (below) out loud, write the answers into the profile, add the line. This is NOT optional and NOT inferable:
+
+- Do **NOT** infer the answers from CLAUDE.md, memory, prior conversations, or this profile's prose — even if you are confident you know them. Asking IS the feature.
+- The shipped TASTE.md is an EXAMPLE, **even if the current user is its original author**. Author ≠ confirmed.
+- A CLAUDE.md pointer that says "load my taste profile" does not count as confirmation either — check for the line.
+- "redo my profile" re-triggers onboarding at any time.
+
 ## The one rule that governs everything
 
 **The agent NEVER picks the final b-roll. The user does.** The right clip is often a taste call. This skill's job is to **narrow the funnel** — classify each moment, scope the search to trusted/authoritative sources, score candidates, and hand back a tight contact sheet. The user makes the final pick.

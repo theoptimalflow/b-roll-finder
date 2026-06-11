@@ -1,5 +1,7 @@
 # TASTE.md — the shipped taste profile
 
+**Status: EXAMPLE PROFILE — not confirmed by any user.** Per SKILL.md Step 0, onboarding MUST run until a `Confirmed-by: <name> (<date>)` line replaces this status line — even for this profile's original author.
+
 > A sourcing skill is only as good as its taste. This file is the curation layer [SKILL.md](SKILL.md) loads before sourcing anything: which kinds of b-roll to reach for, how fast to cut, and which sources are trusted. It ships with **my** taste (Louise's — I make fast-cut tech/marketing video) so the skill makes good calls out of the box. Fork it and make it yours — see [Make it yours](#make-it-yours) at the bottom.
 
 ## Where this taste comes from
