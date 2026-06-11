@@ -7,9 +7,13 @@
 
 **The agent NEVER picks the final b-roll. The user does.** The right clip is often a taste call. This skill's job is to **narrow the funnel** — classify each moment, scope the search to trusted/authoritative sources, score candidates, and hand back a tight contact sheet. The user makes the final pick.
 
-## Onboarding preferences (ask once, store in a profile)
+## The taste profile — load it before sourcing anything
 
-Ask these on first run and write the answers to a profile file the skill loads every run:
+Curation is half the skill. Every run starts by loading a **taste profile**: the b-roll fingerprint (which types, how fast to cut), the trusted-source list tagged by topic, and the guardrails. This repo ships with a working default — **[TASTE.md](TASTE.md)**, revealed from real published videos — so the skill has good taste out of the box. Use it as-is until the user builds their own (TASTE.md's "Make it yours" section covers the import-then-prune mechanism: pull their YouTube subscriptions via `yt-dlp --cookies-from-browser`, prune together, then reveal their fingerprint from their own published videos).
+
+## Onboarding preferences (ask once, store in the profile)
+
+Ask these on first run and write the answers into the taste profile (TASTE.md ships with one set of answers; confirm they fit):
 
 1. **Audio** — does the user talk over b-roll (strip ALL audio: `ffmpeg -an`) or want the clip's sound?
 2. **Stills motion** — static images get a **very subtle Ken Burns zoom-in by default** (~1.5%/sec, centered, capped ~2%/sec); offer opt-out to fully static. **Method matters more than the setting** — see "Stills motion" below.
@@ -147,7 +151,7 @@ After every render, extract a frame at **every beat's midpoint AND every joint**
 
 ## Workflow summary
 
-1. **Load profile / set topic** — preferences + trusted sources tagged for this video's topic.
+1. **Load the taste profile / set topic** — [TASTE.md](TASTE.md) (or the user's fork): fingerprint, preferences, and trusted sources filtered to this video's topic tag.
 2. **Ask style + cadence** — format (podcast / tutorial / fast-cut / heavy-intro) and density. These override genre defaults.
 3. **Get the transcript** — paste, pull from the editor, or transcribe (GPU Whisper, word-level). Long-form (>~10 min): score segments for b-roll value and select the high-value ones first — don't uniformly b-roll an hour.
 4. **Classify + propose (no fetching yet)** — annotate each beat with its interpretation, route, the reference sweep result, and the palette mix. **Present the plan and wait for the user to react** before sourcing.

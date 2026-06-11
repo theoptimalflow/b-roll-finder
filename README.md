@@ -50,6 +50,22 @@ npm create video@latest                           # Remotion, for concept motion
 ```
 A Chrome/Chromium install is also used for headless screenshots of public pages. No API keys required.
 
+**4. (Optional) make the taste yours.** The skill ships with a working taste profile — [TASTE.md](TASTE.md) — so it sources well from the first run. When you're ready, fork it: import your YouTube subscriptions, prune, and reveal your own fingerprint from your published videos (the file walks you through it).
+
+---
+
+## 👅 It ships with taste
+
+Sourcing is only half the job — the other half is **curation**, and that's where most b-roll automation falls flat. So this skill ships with a real taste profile, [TASTE.md](TASTE.md), instead of starting you from a blank interview:
+
+- **A revealed fingerprint** — extracted from actual published videos by scene-cut analysis (not from a questionnaire): which b-roll types get used and how often, real pacing numbers (~26–28 cuts/min, median shot under 2s, sub-second "receipt montages"), and coverage ranges per video style.
+- **A curated, topic-tagged source list** — the channels searches are scoped to, with a note on *why* each one earns b-roll (deadpan reaction gold ≠ credibility flex ≠ concept explainer). A tech video never gets scoped to someone's surf vlogs.
+- **Opinionated guardrails** — always-silent clips, sub-pixel-only stills motion, no random open search.
+
+It also encodes the insight that makes agent-sourced b-roll trustworthy at all: good fast-cut video leans on **objective** b-roll (receipts, official entity clips, your own graphics) — where there's a checkably *correct* answer — and almost never on vibe-picked creator clips. The profile keeps the agent in that lane.
+
+Use it as-is, or fork it — TASTE.md ends with the three-step "make it yours" recipe (import-then-prune your subscriptions, reveal your fingerprint from your own videos, set your guardrails).
+
 ---
 
 ## ▶️ How to use it
