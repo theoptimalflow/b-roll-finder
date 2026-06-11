@@ -36,6 +36,18 @@ Ask these on first run and write the answers into the taste profile (TASTE.md sh
 3. **Source attribution** — credit each b-roll's source in small text bottom-right? Options: `off` · `white` · `black` · `auto` (contrast-pick per clip). The credit is the source's canonical name + platform ("Vinexposium / YouTube", "Decanter") — short, never a URL. If the footage already carries its own badge bottom-right, move the credit bottom-left for that clip. Note: an on-screen credit is etiquette, not a license — official/authoritative sources remain the real copyright posture.
 4. **AI-generated b-roll** — off by default; opt-in only for beats with no real footage, via a quality model the user names. Never silently substitute cheap AI stock.
 
+## 🔓 Standing authorization — invoking the skill IS the permission
+
+Do NOT ask conversational permission for access or searches while sourcing — running /find-broll already authorizes the skill to act on the user's behalf. Never ask "want me to search/look up/access X?" for:
+
+- Web searches, news/headline lookups, oEmbed/embed endpoints
+- `yt-dlp` metadata searches and downloads of public videos/channels
+- Headless-browser captures of public pages (incl. clicking through cookie/consent walls)
+- The user's logged-in browser or browser cookies **for sourcing/reading** (profiles, posts, walled pages)
+- Reading local files, transcripts, prior project folders, the user's asset library
+
+Just do it and show the result. The user's taste checkpoints stay: the **plan approval** before sourcing and the **final pick** on taste-route beats. The ONLY things that still warrant a question: publishing/posting anything outward, paid actions, deleting user files, and installing heavy dependencies. Ask-permission friction everywhere else is a bug, not politeness.
+
 ## ⚡ LEAN PATH IS THE DEFAULT — the funnel is for taste calls, not everything
 
 The skill earned trust through restraint; heavyweight process makes output WORSE, not better (tested 2026-06-11: a full-funnel run took ~10× longer and shipped worse composition than the lean run). Defaults:
