@@ -260,7 +260,7 @@ Grade the grid against this list line by line — "looks fine" without the list 
 
 1. **Load the taste profile / set topic** — [TASTE.md](TASTE.md) (or the user's fork): fingerprint, preferences, and trusted sources filtered to this video's topic tag.
 2. **Ask style + cadence** — format (podcast / tutorial / fast-cut / heavy-intro) and density. These override genre defaults.
-3. **Get the transcript** — paste, pull from the editor, or transcribe (GPU Whisper, word-level). Long-form (>~10 min): score segments for b-roll value and select the high-value ones first — don't uniformly b-roll an hour.
+3. **Get the transcript** — paste, pull from the editor, or transcribe with `mlx_whisper` (GPU, word-level, Spanish): `mlx_whisper <audio> --model mlx-community/whisper-large-v3-turbo --language es --word-timestamps True --output-format json`. Long-form (>~10 min): score segments for b-roll value and select the high-value ones first — don't uniformly b-roll an hour.
 4. **Classify + propose (no fetching yet)** — annotate each beat with its interpretation, route, the reference sweep result, and the palette mix. **Present the plan and wait for the user to react** before sourcing.
 5. **Constrained search** — scoped to trusted/official sources; score candidates; verify person clips against mention-context; drop the weak ones.
 6. **Contact sheet → user picks.**
@@ -268,8 +268,8 @@ Grade the grid against this list line by line — "looks fine" without the list 
 
 ## Tools
 
-- **Transcription:** GPU Whisper for transcript text (large model — the transcript drives *understanding*, so text accuracy matters).
-- **Anchor timing:** Whisper word-level timestamps + later-bias (+0.2–0.5s past the keyword).
+- **Transcription:** `mlx_whisper` (GPU, Apple Silicon) for transcript text — `--model mlx-community/whisper-large-v3-turbo --language es` (large multilingual model: the transcript drives *understanding*, so Spanish text accuracy matters).
+- **Anchor timing:** `mlx_whisper` word-level timestamps (`--word-timestamps True`) + later-bias (+0.2–0.5s past the keyword).
 - **Search / download:** `yt-dlp` (no API key); headless browser + CDP for public-page screenshots (consent walls: click accept in every frame context, verify visually).
 - **Motion-graphics:** Remotion (or similar), rendered full-bleed + silent.
 - **Stills zoom:** `scripts/zoom_still.py` (sub-pixel PIL float-box → x264; `--blurfill` for portrait/odd aspect; never `zoompan`).
